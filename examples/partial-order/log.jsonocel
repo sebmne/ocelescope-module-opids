@@ -1,0 +1,82 @@
+{
+  "objectTypes": [
+    {
+      "name": "order",
+      "attributes": []
+    },
+    {
+      "name": "product",
+      "attributes": []
+    }
+  ],
+  "eventTypes": [
+    {
+      "name": "pick item",
+      "attributes": []
+    },
+    {
+      "name": "place order",
+      "attributes": []
+    },
+    {
+      "name": "ship",
+      "attributes": []
+    }
+  ],
+  "objects": [
+    {
+      "id": "o1",
+      "type": "order",
+      "attributes": [],
+      "relationships": []
+    },
+    {
+      "id": "p1",
+      "type": "product",
+      "attributes": [],
+      "relationships": []
+    }
+  ],
+  "events": [
+    {
+      "id": "e1",
+      "type": "pick item",
+      "time": "2024-06-03T09:01:00Z",
+      "attributes": [],
+      "relationships": [
+        {
+          "objectId": "p1",
+          "qualifier": "product"
+        }
+      ]
+    },
+    {
+      "id": "e2",
+      "type": "place order",
+      "time": "2024-06-03T09:02:00Z",
+      "attributes": [],
+      "relationships": [
+        {
+          "objectId": "o1",
+          "qualifier": "order"
+        }
+      ]
+    },
+    {
+      "id": "e3",
+      "type": "ship",
+      "time": "2024-06-03T09:03:00Z",
+      "attributes": [],
+      "relationships": [
+        {
+          "objectId": "o1",
+          "qualifier": "order"
+        },
+        {
+          "objectId": "p1",
+          "qualifier": "product"
+        }
+      ]
+    }
+  ]
+}

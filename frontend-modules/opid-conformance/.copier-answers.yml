@@ -1,0 +1,8 @@
+# Changes here will be overwritten by Copier; do NOT edit manually
+_commit: 36a9b58
+_src_path: gh:promi4s/create-ocelescope-frontend-module
+api_module: opidConformance
+author: Sebastian Menne
+description: Object-centric conformance alignments for OPIDs, computed with oCoCoMoT
+module_label: OPID Conformance
+npm_package: '@instance/opid-conformance'

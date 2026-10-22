@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  A product is assigned to its order (silent, binding both) after the order is placed and before
+  the product is picked: the net puts "place order" before "pick item", although the two events
+  share no object.
+-->
+<pnml>
+	<net id="partial-order" type="http://www.pnml.org/version-2009/grammar/pnmlcoremodel">
+		<page id="page1">
+			<name><text>Order before pick</text></name>
+			<place id="new_order" color="order"><name><text>new order</text></name></place>
+			<place id="new_product" color="product"><name><text>new product</text></name></place>
+			<place id="placed" color="order"><name><text>placed</text></name></place>
+			<place id="assigned_order" color="order"><name><text>assigned order</text></name></place>
+			<place id="assigned_product" color="product"><name><text>assigned product</text></name></place>
+			<place id="picked" color="product"><name><text>picked</text></name></place>
+			<place id="shipped" color="order">
+				<name><text>shipped</text></name>
+				<finalMarking><text>1</text></finalMarking>
+			</place>
+			<place id="delivered" color="product">
+				<name><text>delivered</text></name>
+				<finalMarking><text>1</text></finalMarking>
+			</place>
+			<transition id="create_order" invisible="true"><name><text>create order</text></name></transition>
+			<transition id="create_product" invisible="true"><name><text>create product</text></name></transition>
+			<transition id="place_order"><name><text>place order</text></name></transition>
+			<transition id="assign" invisible="true"><name><text>assign</text></name></transition>
+			<transition id="pick_item"><name><text>pick item</text></name></transition>
+			<transition id="ship"><name><text>ship</text></name></transition>
+			<arc source="create_order" target="new_order" inscription="nu:order"/>
+			<arc source="create_product" target="new_product" inscription="nu:product"/>
+			<arc source="new_order" target="place_order" inscription="o:order"/>
+			<arc source="place_order" target="placed" inscription="o:order"/>
+			<arc source="placed" target="assign" inscription="o:order"/>
+			<arc source="new_product" target="assign" inscription="p:product"/>
+			<arc source="assign" target="assigned_order" inscription="o:order"/>
+			<arc source="assign" target="assigned_product" inscription="p:product"/>
+			<arc source="assigned_product" target="pick_item" inscription="p:product"/>
+			<arc source="pick_item" target="picked" inscription="p:product"/>
+			<arc source="assigned_order" target="ship" inscription="o:order"/>
+			<arc source="picked" target="ship" inscription="p:product"/>
+			<arc source="ship" target="shipped" inscription="o:order"/>
+			<arc source="ship" target="delivered" inscription="p:product"/>
+		</page>
+	</net>
+</pnml>

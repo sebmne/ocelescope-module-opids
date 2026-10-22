@@ -1,0 +1,25 @@
+{
+	"base_path": "event_logs",
+	"event_logs": [
+		{
+			"key": "container-logistics",
+			"name": "Container Logistics",
+			"version": "3",
+			"file": "container_logistics.db",
+			"url": "https://doi.org/10.5281/zenodo.18373888"
+		},
+		{
+			"key": "orders",
+			"name": "Orders (Gianola et al., Example 1)",
+			"version": "1",
+			"file": "orders.db",
+			"url": "https://doi.org/10.1007/978-3-031-61057-8_1"
+		},
+		{
+			"key": "partial-order",
+			"name": "Order before pick (partial order)",
+			"version": "1",
+			"file": "partial-order.db"
+		}
+	]
+}

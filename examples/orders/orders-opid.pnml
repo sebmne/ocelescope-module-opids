@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  The OPID of Fig. 3 in Gianola, Montali, Winkler: Object-Centric Conformance Alignments with
+  Synchronization (CAiSE 2024), in oCoCoMoT's PNML format. After "place order", every product
+  is kept together with its order in a token (o, p), so "ship" can only take the products of
+  the order it ships.
+-->
+<pnml>
+	<net id="orders" type="http://www.pnml.org/version-2009/grammar/pnmlcoremodel">
+		<page id="page1">
+			<name><text>Order process (Gianola et al., Fig. 3)</text></name>
+			<place id="orders" color="order"><name><text>new order</text></name></place>
+			<place id="products" color="product"><name><text>new product</text></name></place>
+			<place id="placed" color="order"><name><text>placed</text></name></place>
+			<place id="paid" color="order"><name><text>paid</text></name></place>
+			<place id="items" color="order,product"><name><text>ordered item</text></name></place>
+			<place id="picked" color="order,product"><name><text>picked item</text></name></place>
+			<place id="shipped" color="order">
+				<name><text>shipped</text></name>
+				<finalMarking><text>1</text></finalMarking>
+			</place>
+			<place id="delivered" color="order,product">
+				<name><text>shipped item</text></name>
+				<finalMarking><text>1</text></finalMarking>
+			</place>
+			<transition id="new_order" invisible="true"><name><text>create order</text></name></transition>
+			<transition id="new_product" invisible="true"><name><text>create product</text></name></transition>
+			<transition id="place_order"><name><text>place order</text></name></transition>
+			<transition id="payment"><name><text>payment</text></name></transition>
+			<transition id="pick_item"><name><text>pick item</text></name></transition>
+			<transition id="ship"><name><text>ship</text></name></transition>
+			<arc source="new_order" target="orders" inscription="nu:order"/>
+			<arc source="new_product" target="products" inscription="nu:product"/>
+			<arc source="orders" target="place_order" inscription="o:order"/>
+			<arc source="products" target="place_order" inscription="P:product LIST"/>
+			<arc source="place_order" target="placed" inscription="o:order"/>
+			<arc source="place_order" target="items" inscription="o:order,P:product LIST"/>
+			<arc source="placed" target="payment" inscription="o:order"/>
+			<arc source="payment" target="paid" inscription="o:order"/>
+			<arc source="items" target="pick_item" inscription="o:order,p:product"/>
+			<arc source="pick_item" target="picked" inscription="o:order,p:product"/>
+			<arc source="paid" target="ship" inscription="o:order"/>
+			<arc source="picked" target="ship" inscription="o:order,P:product LIST"/>
+			<arc source="ship" target="shipped" inscription="o:order"/>
+			<arc source="ship" target="delivered" inscription="o:order,P:product LIST"/>
+		</page>
+	</net>
+</pnml>
