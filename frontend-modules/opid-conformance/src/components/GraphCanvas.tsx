@@ -25,8 +25,6 @@ export interface GraphCanvasProps {
   /** Changes when the graph itself changes (not its highlighting): the view then fits again. */
   layoutKey: string;
   height: number;
-  /** A thumbnail: no panning, zooming or controls. */
-  still?: boolean;
   onNodeClick?: (id: string) => void;
   onPaneClick?: () => void;
   /** Shown in the top left corner, e.g. a legend. */
@@ -57,7 +55,6 @@ export default function GraphCanvas({
   ready,
   layoutKey,
   height,
-  still = false,
   onNodeClick,
   onPaneClick,
   overlay,
@@ -85,19 +82,19 @@ export default function GraphCanvas({
             nodesDraggable={false}
             nodesConnectable={false}
             elementsSelectable={!!onNodeClick}
-            panOnDrag={!still}
+            panOnDrag
             // The wheel scrolls the page; zoom with a pinch or the controls.
             zoomOnScroll={false}
             preventScrolling={false}
-            zoomOnPinch={!still}
-            zoomOnDoubleClick={!still}
+            zoomOnPinch
+            zoomOnDoubleClick
             onNodeClick={onNodeClick ? (_, node) => onNodeClick(node.id) : undefined}
             onPaneClick={onPaneClick}
             proOptions={{ hideAttribution: true }}
           >
             <FitOnChange layoutKey={layoutKey} />
-            {!still && <Background gap={24} size={1} />}
-            {!still && <Controls showInteractive={false} />}
+            <Background gap={24} size={1} />
+            <Controls showInteractive={false} />
             {overlay && <Panel position="top-left">{overlay}</Panel>}
           </ReactFlow>
         </ReactFlowProvider>
